@@ -1,0 +1,175 @@
+#+Title: Implementation of *experiment server* project  
+#+Author: Sytems Team
+#+SETUPFILE: ../org-templates/level-1.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+# !/usr/bin/env zsh
+# -*- mode: shell-script -*-
+
+* Introduction
+  - This document contains the implementation of *experiment server*
+    project. 
+* Experiment Server Labs
+  - The experiments which are running from a single server and
+    executed at the client end. Hence this list contains experiments
+    written in Javascript, Flash, HTML, CSS. All labs at level 5/6 are
+    to be scanned to identify the desired list.
+  - [[http://issues.vlabs.ac.in/issues/1084][Here]] is the detailed information regarding the project.
+  - Identified 31 labs which are running from experiment server. 
+  - Compared all these 31 labs with the labs hosted on production.
+  - Identified and fixed the two labs(Modern Digital Design Lab and
+    Single Board Heater System Virtual Lab) which are not ported
+    properly.
+ 
+* Implementation
+** Automation script for the experiment server labs
+   - Read the lab names from the file labs.json and clone the labs.
+   - Initially the below python code imports the required modules to run the script.
+#+BEGIN_SRC python :tangle automation.py
+import json
+import sys
+import os
+import os.path
+from pprint import pprint
+from git import Repo
+import git
+#+END_SRC
+
+   - Assigning variables in the script
+#+BEGIN_SRC python :tangle automation.py
+exp_id = "../exp-ids"
+labs = "../exp-server-labs"
+#+END_SRC
+
+   - variable to store proxy value
+#+BEGIN_SRC python :tangle automation.py
+proxy = "http://proxy.iiit.ac.in:8080"
+#+END_SRC
+
+   - setup proxy to install required module
+#+BEGIN_SRC python :tangle automation.py
+os.environ["HTTP_PROXY"] = proxy
+os.environ["HTTPS_PROXY"] = proxy
+#+END_SRC
+
+   - Create directories to store experiment Id's and repositories
+      - exp-server-labs : to store all the repositories 
+#+BEGIN_SRC python :tangle automation.py
+os.makedirs('../exp-server-labs')
+#+END_SRC
+
+   - Open and read the json file to get exp-ids and repositories
+#+BEGIN_SRC python :tangle automation.py
+with open('labs.json') as data_file:
+    data = json.load(data_file)
+   
+#+END_SRC
+
+   - Prints exp-ids    
+#+BEGIN_SRC python :tangle automation.py
+    for i in range(31):
+        os.chdir(exp_id)
+        if not os.path.isdir("exp_id[i]"):
+            repo_id = data[i]["Lab_ID"]
+            pprint (repo_id)
+
+#+END_SRC
+
+   - Clones all the repositories in the "experiment-sever-labs" directory
+#+BEGIN_SRC python :tangle automation.py     
+    os.chdir(labs)
+    for i in range(31):
+        if not os.path.isdir("labs[i]"):
+            os.system("git clone %s" % data[i]["Github_Url"])            
+#+END_SRC
+
+   - Splitting the github url and taking the repository name to run makefile in the repository
+#+BEGIN_SRC python :tangle automation.py
+            repo_name = data[i]["Github_Url"].split("/")[-1]
+            pprint (repo_name)
+
+#+END_SRC
+
+   - Reads each repository to run make file            
+#+BEGIN_SRC python :tangle automation.py
+            os.chdir(repo_name)                 
+            if not os.path.isdir(repo_name):          
+                cmd1 = "make -C src/"
+                os.system(cmd1)
+                lab_id= data[i]["Lab_ID"]
+#+END_SRC
+
+   - Copies build folder to "/var/www/html"
+#+BEGIN_SRC python :tangle automation.py
+                cmd2 = "sudo rsync -rav build/* " + "/var/www/html" + lab_id + "/"
+                #pprint (cmd2)
+                os.system(cmd2)
+                #  pprint (cmd)
+                #cmd = "cd .."
+                os.chdir("..")
+#+END_SRC
+
+** Steps to Ceate a VM on base4
+   - Open terminal login to base4 with the below command:
+#+BEGIN_SRC
+ssh modepusravanthi@10.4.12.24
+#+END_SRC
+   - Enter into the root from the container using the below command.
+#+BEGIN_SRC
+sudo su -
+#+END_SRC
+   - Create a container with below command:  
+#+BEGIN_SRC
+vzctl create 31 --ostemplate ubuntu-14.04-x86_64 --ipadd 10.4.12.31 --hostname experiment-server-labs
+#+END_SRC
+   - Then start the container as :
+#+BEGIN_SRC
+vzctl start 31
+#+END_SRC
+** Steps to copy the experiment server script to the container
+   - Open another tab in terminal, go to the experiment-server
+     path and type below command to copy the script inside the
+     "/root/home/" of a container.
+#+BEGIN_EXAMPLE
+rsync -avz --progress experiment-server root@10.4.12.31:/root/home/
+#+END_EXAMPLE 
+** Usage of Python Script
+   - Install and setup git from a [[https://githowto.com/][Git]] intallation Guide
+   - Copy the link [[https://gitlab.com/vlead-systems/experiment-server/][https://gitlab.com/vlead-systems/experiment-server]]
+   - Go to terminal and type below command to clone the repository
+#+BEGIN_EXAMPLE
+git clone https://gitlab.com/vlead-systems/experiment-server/
+#+END_EXAMPLE
+   - Change the directory to "experiment-server/src/implemetation/"
+   - Edit index.org to make appropriate changes.
+   - Following changes need to be done in the index.org file
+#+BEGIN_EXAMPLE
+   setup "proxy" according to the network.
+   Change variables and range accordingly
+#+END_EXAMPLE
+   - Make the below changes inside the build section in the makefile
+     to get json file.
+   - Changes in the makefile generates the labs.json file in
+     build/code/implementation.
+#+BEGIN_SRC 
+   rsync -rav src/implementation/labs.json build/code/implementation
+   sudo rm -rf /var/www/html/*
+#+END_SRC
+   - Enter into the container with the below command 
+#+BEGIN_SRC
+vzctl enter 31
+#+END_SRC 
+   - Go to experiment-server and run make file.
+   - A build folder is generated in expeirment-server-labs.  
+   - Inside the build/code/implementation, two files are generated
+     namely automation.py and labs.json.
+   - Run python file after entering into the container with below command:
+#+BEGIN_EXAMPLE
+   python autmation.py
+#+END_EXAMPLE
+** Output of the script
+   - Prints exp-ids. 
+   - Clones all the repositories in the "exp-server-labs" directory
+   - Reads each repository and runs makefile 
+   - Then the generated build folder is copied to "/var/www/html/" 
