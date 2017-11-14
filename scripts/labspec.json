@@ -44,8 +44,8 @@
                         "office_number": ""
                     }, 
                     "department": "", 
-                    "institute": "NITK Surathkal", 
-                    "name": "Mohit tahiliani", 
+                    "institute": "IIIT Hyderabad", 
+                    "name": "Sravanthi", 
                     "organization": "", 
                     "role": "Lab RA", 
                     "title": "", 
@@ -53,11 +53,11 @@
                 }
             ], 
             "discipline": [
-                "Fluid Mechanics"
+                "Experiment Server Test"
             ], 
-            "id": "fm01", 
+            "id": "exp-serv-test", 
             "integration_level": 5, 
-            "name": " Civil", 
+            "name": " vlead", 
             "server-side": true, 
             "status": "Released", 
             "type": ""
