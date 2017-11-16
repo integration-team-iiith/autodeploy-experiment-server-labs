@@ -51,13 +51,11 @@
         "installer": [
         ],
         "build_steps": {
-          "build": [
-            "cd ../;make build"
-          ],
+          "build": ["cd ../;make "],
       	  "configure": [], 
           "post_build": [
             "service apache2 restart",
-            "cp -R ../build/code/* /var/www/html",
+            "cp -rf ../build/code/* /var/www/html",
             "chmod -R 755 /var/www/html",
             "mkdir /var/www/html/logs",
             "chmod -R 777 /var/www/html/logs"
