@@ -81,8 +81,8 @@
           "min_required": "10gb"
         },
         "installer": [
-          "bash /var/www/html/automation.py",
-          "python /var/www/html/automation.py install"
+          "bash /var/www/html/implementation/automation.py",
+          "python /var/www/html/implementation/automation.py install"
         ],
         "lab_actions": {
           "init"    : [],
