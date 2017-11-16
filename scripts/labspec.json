@@ -83,8 +83,8 @@
           "min_required": "10gb"
         },
         "installer": [
-          "bash /var/www/exp-server-labs/",
-          "python /var/www/exp-server-labs/ install"
+          "bash /var/www/implementation/automation.py",
+          "python /var/www/implementation/automation.py install"
         ],
         "lab_actions": {
           "init"    : [],
