@@ -64,7 +64,7 @@
             ],  
           "pre_build": ["sudo apt-get update",
                         "sudo apt-get install -y php5 apache2 php5-mysql python-pip",
-		        "sudo apt-get install python-git",
+		        "sudo apt-get install python-git"
 		       ], 
           "status": []
         }
