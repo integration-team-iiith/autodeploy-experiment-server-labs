@@ -51,19 +51,17 @@
         "installer": [
         ],
         "build_steps": {
+          "configure": [],
+          "pre_build": [],
           "build": [
             "cd ../;make build"
           ],
-      	  "configure": [], 
           "post_build": [
-            "service apache2 restart",
-            "cp -R ../build/code/* /var/www/",
-            "chmod -R 755 /var/www/",
-            "mkdir /var/www/logs",
-            "chmod -R 777 /var/www/logs"
-            ],  
-          "pre_build": ["sudo apt-get update",
-                        "sudo apt-get install -y php5 apache2 php5-mysql git"], 
+            "cp -R ../build/code/* /var/www/html",
+            "chmod -R 755 /var/www/html",
+            "mkdir /var/www/html/logs",
+            "chmod -R 777 /var/www/html/logs"
+          ],
           "status": []
         }
       }

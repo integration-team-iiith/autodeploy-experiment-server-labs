@@ -53,10 +53,17 @@ os.environ["HTTP_PROXY"] = proxy
 os.environ["HTTPS_PROXY"] = proxy
 #+END_SRC
 
+   - Install required modules
+#+BEGIN_SRC python :tangle automation.py
+os.system("sudo apt-get install python-pip")
+os.system("sudo pip install gitpython")
+#+END_SRC
+
    - Create directories to store experiment Id's and repositories
       - exp-server-labs : to store all the repositories 
 #+BEGIN_SRC python :tangle automation.py
 os.makedirs('../exp-server-labs')
+
 #+END_SRC
 
    - Open and read the json file to get exp-ids and repositories
@@ -69,7 +76,7 @@ with open('labs.json') as data_file:
    - Prints exp-ids    
 #+BEGIN_SRC python :tangle automation.py
     for i in range(31):
-        os.chdir(exp_id)
+#        os.chdir(exp_id)
         if not os.path.isdir("exp_id[i]"):
             repo_id = data[i]["Lab_ID"]
             pprint (repo_id)
