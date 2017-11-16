@@ -51,7 +51,7 @@
         "installer": [
         ],
         "build_steps": {
-          "build": ["cd ../;make build"],
+          "build": ["cd ../;make"],
       	  "configure": [], 
           "post_build": [
             "service apache2 restart",
@@ -83,8 +83,7 @@
           "min_required": "10gb"
         },
         "installer": [
-          "bash /var/www/implementation/automation.py",
-          "python /var/www/implementation/automation.py install"
+          "python /var/www/implementation/automation.py"
         ],
         "lab_actions": {
           "init"    : [],
