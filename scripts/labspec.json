@@ -48,16 +48,14 @@
         "osVersion": "12",
         "arch": "x64",
         "service_pack": "",
-        "installer": [
+        "installer": ["python /build/code/implementation/automation.py"
         ],
         "build_steps": {
           "build": ["cd ../;make"],
       	  "configure": [], 
-      	  "installer":["python /build/code/implementation/automation.py"
-                      ],
           "post_build": [
             "service apache2 restart",
-            "cp -rf ../build/code/exp-server-labs/* /var/www/",
+            "cp -rf ../build/code/* /var/www/",
             "chmod -R 755 /var/www/",
             "mkdir /var/www/logs",
             "chmod -R 777 /var/www/logs"
