@@ -1,4 +1,3 @@
-
 {
   "lab": {
     "description": {
@@ -48,10 +47,10 @@
         "osVersion": "12",
         "arch": "x64",
         "service_pack": "",
+	"build": ["cd ../;make"],
         "installer": ["python /build/code/implementation/automation.py install"
         ],
         "build_steps": {
-          "build": ["cd ../;make"],
       	  "configure": [], 
           "post_build": [
             "service apache2 restart",
