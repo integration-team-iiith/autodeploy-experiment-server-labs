@@ -47,22 +47,18 @@
         "osVersion": "12",
         "arch": "x64",
         "service_pack": "",
+        "installer": [],
         "build_steps": {
       	  "configure": [], 
-	   "pre_build": [
-	     "sudo apt-get update",
-             "sudo apt-get install -y php5 apache2 php5-mysql python-pip",
-	     "sudo apt-get install -y python-git"
-            ],
-           "build": ["cd ../;make  "],
-	   "installer":["python build/code/implementation/automation.py"],
-           "post_build": [
-             "service apache2 restart",
-             "cp -rf ../build/code/* /var/www/",
-             "chmod -R 755 /var/www/",
-             "mkdir /var/www/logs",
-             "chmod -R 777 /var/www/logs"
-            ],   
+	   "pre_build": [],
+            "build": ["cd ../;make  ", "cd build/code/implementation"],	    
+            "installer": [
+	      "sudo apt-get update",
+              "sudo apt-get install -y php5 apache2 php5-mysql python-pip",
+	      "sudo apt-get install -y python-git"	
+	      "python automation.py"
+	    ],
+	    "post_build": [],   
           "status": []
         }
       }
@@ -82,7 +78,13 @@
           "min_required": "10gb"
         },
         "lab_actions": {
-          "init"    : [],
+          "init"    : [
+	     "service apache2 restart",
+             "cp -rf ../build/code/* /var/www/",
+             "chmod -R 755 /var/www/",
+             "mkdir /var/www/logs",
+             "chmod -R 777 /var/www/logs"
+	  ],
           "shutdown": [],
           "pause"   : [],
           "resume"  : [],
