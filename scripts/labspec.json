@@ -76,12 +76,14 @@
         "installer": [
 	    "sudo apt-get update",
             "sudo apt-get install -y php5 apache2 php5-mysql python-pip",
-	    "sudo apt-get install -y python-git"
+	    "sudo apt-get install -y python-git",
+	    "cd ../build/code/implementation/",
+	    "python automation.py"
 	],
         "lab_actions": {
           "init"    : [
 	     "service apache2 restart",
-             "cp -rf ../build/code/exp-server-labs/* /var/www/",
+             "cp -rf ../exp-server-labs/* /var/www/",
              "chmod -R 755 /var/www/",
              "mkdir /var/www/logs",
              "chmod -R 777 /var/www/logs"
