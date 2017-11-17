@@ -109,7 +109,7 @@ with open('labs.json') as data_file:
 
    - Copies build folder to "/var/www/html"
 #+BEGIN_SRC python :tangle automation.py
-                cmd2 = "sudo rsync -rav build/* " + "/var/www/html" + lab_id + "/"
+                cmd2 = "sudo rsync -rav build/ " + "/var/www/" + lab_id + "/"
                 #pprint (cmd2)
                 os.system(cmd2)
                 #  pprint (cmd)
