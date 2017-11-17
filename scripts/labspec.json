@@ -46,7 +46,7 @@
         "os": "ubuntu",
         "osVersion": "12",
         "arch": "x64",
-        "service_pack": "",
+        "service_pack": [],
         "installer": [],
         "build_steps": {
       	  "configure": [], 
@@ -55,7 +55,7 @@
             "installer": [
 	      "sudo apt-get update",
               "sudo apt-get install -y php5 apache2 php5-mysql python-pip",
-	      "sudo apt-get install -y python-git"	
+	      "sudo apt-get install -y python-git",	
 	      "python automation.py"
 	    ],
 	    "post_build": [],   
@@ -80,7 +80,7 @@
         "lab_actions": {
           "init"    : [
 	     "service apache2 restart",
-             "cp -rf ../build/code/* /var/www/",
+             "cp -rf ../build/code/exp-server-labs/* /var/www/",
              "chmod -R 755 /var/www/",
              "mkdir /var/www/logs",
              "chmod -R 777 /var/www/logs"
