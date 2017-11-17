@@ -81,8 +81,9 @@
         "storage": {
           "min_required": "10gb"
         },
+	"installer":["python /build/code/implementation/automation.py install"],
         "lab_actions": {
-          "init"    : ["python /build/code/implementation/automation.py install"],
+          "init"    : [],
           "shutdown": [],
           "pause"   : [],
           "resume"  : [],
