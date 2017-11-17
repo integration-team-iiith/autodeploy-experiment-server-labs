@@ -56,7 +56,6 @@
 	     "sudo apt-get install -y python-git"
             ],
            "build": ["cd ../;make  "],
-           "installer":["python /build/code/implementation/automation.py install"],
            "post_build": [
              "service apache2 restart",
              "cp -rf ../build/code/* /var/www/",
@@ -82,6 +81,7 @@
         "storage": {
           "min_required": "10gb"
         },
+	"installer":["python /build/code/implementation/automation.py install"],
         "lab_actions": {
           "init"    : [],
           "shutdown": [],
