@@ -63,7 +63,10 @@
           "pre_build": ["sudo apt-get update",
                         "sudo apt-get install -y php5 apache2 php5-mysql python-pip",
 		        "sudo apt-get install -y python-git"
-		       ], 
+		       ],
+	  "installer": [
+            "python /build/code/implementation/automation.py"
+        ],
           "status": []
         }
       }
@@ -82,9 +85,6 @@
         "storage": {
           "min_required": "10gb"
         },
-        "installer": [
-          "python /build/code/implementation/automation.py"
-        ],
         "lab_actions": {
           "init"    : [],
           "shutdown": [],
