@@ -47,8 +47,8 @@
         "osVersion": "12",
         "arch": "x64",
         "service_pack": "",
-	"build": ["cd ../;make"],
-        "installer": ["python ../build/code/implementation/automation.py install"
+	"build": ["make"],
+        "installer": ["python /build/code/implementation/automation.py install"
         ],
         "build_steps": {
       	  "configure": [], 
