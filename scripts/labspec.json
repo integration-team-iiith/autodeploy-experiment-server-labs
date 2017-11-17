@@ -53,11 +53,10 @@
         "build_steps": {
           "build": ["cd ../;make"],
       	  "configure": [], 
+      	  "installer":["python /build/code/implementation/automation.py"
+                      ],
           "post_build": [
             "service apache2 restart",
-	    "installer": [
-		"python /build/code/implementation/automation.py"
-                         ],
             "cp -rf ../build/code/exp-server-labs/* /var/www/",
             "chmod -R 755 /var/www/",
             "mkdir /var/www/logs",
