@@ -44,13 +44,13 @@ labs = "../exp-server-labs"
 
    - variable to store proxy value
 #+BEGIN_SRC python :tangle automation.py
-# proxy = "http://proxy.iiit.ac.in:8080"
+proxy = "http://proxy.iiit.ac.in:8080"
 #+END_SRC
 
    - setup proxy to install required module
 #+BEGIN_SRC python :tangle automation.py
-# os.environ["HTTP_PROXY"] = proxy
-# os.environ["HTTPS_PROXY"] = proxy
+os.environ["HTTP_PROXY"] = proxy
+os.environ["HTTPS_PROXY"] = proxy
 #+END_SRC
 
    - Install required modules
