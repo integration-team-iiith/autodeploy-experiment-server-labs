@@ -174,15 +174,15 @@
     "Lab Name": "Molecular Absorption Spectroscopy Lab"
   },
   {
-    "Lab_ID": "mfs-iiith",
-    "Lab_Url": "https://mfs-iiith.vlabs.ac.in",
-    "Github_Url": "https://github.com/Virtual-Labs/molecular-florescence-spectroscopy-responsive-lab-iiith",
-    "Lab Name": "Molecular Fluorescence Spectroscopy"
-  },
-  {
     "Lab_ID": "uorepc-nitk",
     "Lab_Url": "https://uorepc-nitk.vlabs.ac.in",
     "Github_Url": "https://github.com/Virtual-Labs/unit-operation-reaction-engineering-and--process-control-nitk",
     "Lab Name": "Unit-Operation-Reaction-Engg.-Process-Control lab"
+  },
+  {
+    "Lab_ID": "mfs-iiith",
+    "Lab_Url": "https://mfs-iiith.vlabs.ac.in",
+    "Github_Url": "https://github.com/Virtual-Labs/molecular-florescence-spectroscopy-responsive-lab-iiith",
+    "Lab Name": "Molecular Fluorescence Spectroscopy"
   }
 ]
