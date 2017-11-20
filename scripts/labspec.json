@@ -71,7 +71,7 @@
           "min_required": "2gb"
         },
         "storage": {
-          "min_required": "10gb"
+          "min_required": "30gb"
         },
         "installer": [
 	    "sudo apt-get update",
