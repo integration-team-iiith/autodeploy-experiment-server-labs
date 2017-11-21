@@ -34,13 +34,14 @@ import os.path
 from pprint import pprint
 from git import Repo
 import git
+import logging
 #+END_SRC
 
    - Assigning variables in the script
 #+BEGIN_SRC python :tangle automation.py
 exp_id = "../exp-ids"
 labs = "../exp-server-labs"
-filename ="status"
+
 #+END_SRC
 
    - variable to store proxy value
@@ -64,7 +65,7 @@ os.system("sudo pip install gitpython")
       - exp-server-labs : to store all the repositories 
 #+BEGIN_SRC python :tangle automation.py
 os.makedirs('../exp-server-labs')
-os.mkdir('../status')
+
 #+END_SRC
 
    - Open and read the json file to get exp-ids and repositories
@@ -119,9 +120,9 @@ with open('labs.json') as data_file:
 #+END_SRC
 - Printing output to a file
 #+BEGIN_SRC python :tangle automation.py
-                filename  = open("outputfile",'w')
-                sys.stdout = filename
-                print "Anything printed will go to the output file"
+                sys.stdout = sys.stderr = open('logfile', 'a')
+                print('this should be working from anywhere')
+                logging.warn('this too')
 #+END_SRC
 
 ** Steps to Ceate a VM on base4
