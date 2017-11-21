@@ -40,17 +40,18 @@ import git
 #+BEGIN_SRC python :tangle automation.py
 exp_id = "../exp-ids"
 labs = "../exp-server-labs"
+filename ="status"
 #+END_SRC
 
    - variable to store proxy value
 #+BEGIN_SRC python :tangle automation.py
-# proxy = "http://proxy.iiit.ac.in:8080"
+proxy = "http://proxy.iiit.ac.in:8080"
 #+END_SRC
 
    - setup proxy to install required module
 #+BEGIN_SRC python :tangle automation.py
-# os.environ["HTTP_PROXY"] = proxy
-# os.environ["HTTPS_PROXY"] = proxy
+os.environ["HTTP_PROXY"] = proxy
+os.environ["HTTPS_PROXY"] = proxy
 #+END_SRC
 
    - Install required modules
@@ -63,7 +64,7 @@ os.system("sudo pip install gitpython")
       - exp-server-labs : to store all the repositories 
 #+BEGIN_SRC python :tangle automation.py
 os.makedirs('../exp-server-labs')
-
+os.mkdir('../status')
 #+END_SRC
 
    - Open and read the json file to get exp-ids and repositories
@@ -115,6 +116,12 @@ with open('labs.json') as data_file:
                 #  pprint (cmd)
                 #cmd = "cd .."
                 os.chdir("..")
+#+END_SRC
+- Printing output to a file
+#+BEGIN_SRC python :tangle automation.py
+                filename  = open("outputfile",'w')
+                sys.stdout = filename
+                print "Anything printed will go to the output file"
 #+END_SRC
 
 ** Steps to Ceate a VM on base4
